@@ -1,42 +1,69 @@
 import React from "react";
 
-const InventoryTable = ({ items }) => {
-  const tableWrap = { overflowX: "auto" };
-  const table = {
-    width: "100%",
-    borderCollapse: "separate",
-    borderSpacing: 0,
-    borderRadius: 12,
-    overflow: "hidden",
+const InventoryTable = ({ items = [] }) => {
+  const styles = {
+    tableWrap: { overflowX: "auto" },
+    table: {
+      width: "100%",
+      borderCollapse: "collapse",
+      borderRadius: 12,
+      overflow: "hidden",
+      boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
+    },
+    th: {
+      padding: "12px 14px",
+      borderBottom: "2px solid #e5e7eb",
+      background: "#f5f7fb",
+      fontWeight: 600,
+      fontSize: 14,
+      textAlign: "left",
+    },
+    td: {
+      padding: "12px 14px",
+      borderBottom: "1px solid #f0f0f0",
+      fontSize: 14,
+    },
+    row: {
+      transition: "background 0.2s ease",
+      cursor: "pointer",
+    },
   };
-  const thtd = { padding: "12px 14px", borderBottom: "1px solid #eee", textAlign: "left" };
-  const th = { ...thtd, background: "#f5f7fb", fontWeight: 700, fontSize: 14 };
-  const rowHover = { transition: "background 0.2s" };
 
   return (
-    <div style={tableWrap}>
-      <table style={table}>
+    <div style={styles.tableWrap}>
+      <table style={styles.table}>
         <thead>
           <tr>
-            <th style={th}>ID</th>
-            <th style={th}>Name</th>
-            <th style={th}>Quantity</th>
-            <th style={th}>Date</th>
+            <th style={styles.th}>ID</th>
+            <th style={styles.th}>Name</th>
+            <th style={styles.th}>Quantity</th>
+            <th style={styles.th}>Date</th>
           </tr>
         </thead>
         <tbody>
-          {items && items.length ? (
-            items.map((it) => (
-              <tr key={it.id} style={rowHover} onMouseEnter={(e) => (e.currentTarget.style.background = "#fafafa")} onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}>
-                <td style={thtd}>{it.id}</td>
-                <td style={thtd}>{it.name}</td>
-                <td style={thtd}>{it.quantity}</td>
-                <td style={thtd}>{it.date}</td>
+          {items.length > 0 ? (
+            items.map((item) => (
+              <tr
+                key={item.id}
+                style={styles.row}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.background = "#fafafa")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.background = "transparent")
+                }
+              >
+                <td style={styles.td}>{item.id}</td>
+                <td style={styles.td}>{item.name}</td>
+                <td style={styles.td}>{item.quantity}</td>
+                <td style={styles.td}>{item.date}</td>
               </tr>
             ))
           ) : (
             <tr>
-              <td style={thtd} colSpan="4">No items found.</td>
+              <td style={styles.td} colSpan="4" align="center">
+                No items found.
+              </td>
             </tr>
           )}
         </tbody>

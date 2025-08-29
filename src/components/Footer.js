@@ -2,10 +2,10 @@ import React from "react";
 
 const Footer = () => {
   const style = {
-    position: "fixed",    // 👈 stays fixed
-    bottom: 0,            // 👈 at bottom
+    position: "fixed",    
+    bottom: 0,            
     left: 0,
-    width: "100%",        // full width
+    width: "100%",        
     textAlign: "center",
     padding: "12px",
     background: "#ffffff",
